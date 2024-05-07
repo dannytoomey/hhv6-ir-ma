@@ -1,0 +1,17 @@
+cd	cd
+dat.age	dat.age
+dat.age_raw	dat.age_raw
+dat.asat	dat.asat
+dat.asat_raw	dat.asat_raw
+dat.ck	dat.ck
+dat.ck_raw	dat.ck_raw
+dat.phq9	dat.phq9
+dat.phq9_raw	dat.phq9_raw
+describe_studies	describe_studies
+metamean	metamean
+metamedian	metamedian
+metamedian-defunct	metamedian-defunct
+pool.med	pool.med
+print.describe_studies	print.describe_studies
+qe	qe
+qe.study.level	qe.study.level

@@ -1,0 +1,37 @@
+cd                      Meta-Analysis via the confidence distribution
+                        approach
+dat.age                 Example data set: Comparing the age between
+                        COVID-19 survivors and nonsurvivors (cleaned
+                        version)
+dat.age_raw             Example data set: Comparing the age between
+                        COVID-19 survivors and nonsurvivors (raw
+                        version)
+dat.asat                Example data set: Comparing aspartate
+                        transaminase levels between COVID-19 survivors
+                        and nonsurvivors (cleaned version)
+dat.asat_raw            Example data set: Comparing aspartate
+                        transaminase levels between COVID-19 survivors
+                        and nonsurvivors (raw version)
+dat.ck                  Example data set: Comparing creatine kinase
+                        levels between COVID-19 survivors and
+                        nonsurvivors (cleaned version)
+dat.ck_raw              Example data set: Comparing creatine kinase
+                        transaminase levels between COVID-19 survivors
+                        and nonsurvivors (raw version)
+dat.phq9                Example data set: Patient Health
+                        Questionnaire-9 (PHQ-9) scores (processed
+                        version)
+dat.phq9_raw            Example data set: Patient Health
+                        Questionnaire-9 (PHQ-9) scores (raw version)
+describe_studies        Descriptive statistics for meta-analyzing
+                        studies reporting medians
+metamean                Meta-Analysis of the (difference of) means
+metamedian              Meta-Analysis of the (difference of) medians
+metamedian-defunct      Defunct functions in package 'metamedian'
+pool.med                Meta-Analysis via median of (the difference of)
+                        medians method
+print.describe_studies
+                        Print method for "describe_studies" objects
+qe                      Meta-Analysis via quantile estimation method
+qe.study.level          Study-Level application of quantile estimation
+                        method

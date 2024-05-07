@@ -1,0 +1,140 @@
+delayed engraftment 2024-05-07 10:24:08.80199
+
+-- RMA, RR -- 
+
+Review:     HHV-6 and Delayed Neutrophil Engraftment
+ 
+                               RR            95%-CI %W(random)
+ Betts BC 2011             1.3696 [0.4343;  4.3186]        2.9
+ Chan PK 1997              2.5882 [0.1714; 39.0829]        0.5
+ Düver F 2020              0.9861 [0.0925; 10.5143]        0.7
+ El Jurdi N 2021           1.3037 [0.4980;  3.4133]        4.0
+ Gomes de Oliveira PG 2016 0.8658 [0.7010;  1.0693]       41.3
+ Hentrich M 2005           0.5581 [0.2333;  1.3352]        4.8
+ Le Bourgeois A 2014       2.4444 [0.9789;  6.1041]        4.4
+ Raouf MME 2023            2.5000 [0.8395;  7.4451]        3.2
+ Savolainen H 2005         1.0220 [0.0439; 23.8078]        0.4
+ Violago L 2015            1.1368 [0.9001;  1.4358]       37.4
+ Wang LR 2006              0.5515 [0.0233; 13.0700]        0.4
+ 
+ Number of studies: k = 11
+ Number of observations: o = 1005
+ Number of events: e = 246
+ 
+                          RR           95%-CI    t p-value
+ Random effects model 1.0526 [0.8401; 1.3189] 0.51  0.6236
+ 
+ Quantifying heterogeneity:
+  tau^2 = 0.0132 [0.0000; 0.4194]; tau = 0.1150 [0.0000; 0.6476]
+  I^2 = 17.9% [0.0%; 58.0%]; H = 1.10 [1.00; 1.54]
+ 
+ Test of heterogeneity:
+      Q d.f. p-value
+  12.18   10  0.2734
+ 
+ Details on meta-analytical method:
+ - Inverse variance method
+ - Paule-Mandel estimator for tau^2
+ - Q-Profile method for confidence interval of tau^2 and tau
+ - Hartung-Knapp adjustment for random effects model (df = 10)
+ - Continuity correction of 0.5 in studies with zero cell frequencies
+
+-- Bayes, RR -- 
+
+Model type: Rubin model with aggregate data 
+ Pooling of effects: partial 
+ 
+ Aggregate treatment effect (on logRR), 11 groups:
+ Hypermean (tau) =  0.13 with 95% interval -0.23 to 0.59 
+ Hyper-SD (sigma_tau) = 0.358 with 95% interval 0.027 to 0.963 
+ Total pooling (1 - I^2) = 0.514 with 95% interval 0.091 to 0.992 
+ 
+ Group-specific treatment effects:
+                             mean   sd  2.5%    50% 97.5% pooling
+ Betts BC 2011              0.169 0.33 -0.45  0.129  0.92    0.74
+ Chan PK 1997               0.190 0.44 -0.60  0.130  1.22    0.92
+ Düver F 2020               0.110 0.41 -0.73  0.086  1.01    0.90
+ El Jurdi N 2021            0.162 0.31 -0.41  0.129  0.85    0.68
+ Gomes de Oliveira PG 2016 -0.100 0.11 -0.31 -0.099  0.11    0.21
+ Hentrich M 2005           -0.133 0.32 -0.87 -0.084  0.40    0.65
+ Le Bourgeois A 2014        0.373 0.36 -0.17  0.316  1.20    0.66
+ Raouf MME 2023             0.337 0.38 -0.24  0.268  1.22    0.72
+ Savolainen H 2005          0.143 0.45 -0.74  0.100  1.17    0.96
+ Violago L 2015             0.115 0.11 -0.10  0.113  0.34    0.23
+ Wang LR 2006               0.085 0.45 -0.88  0.070  1.04    0.96
+ 
+-- RMA, median and range -- 
+
+ Random-Effects Model (k = 7; tau^2 estimator: REML)
+ 
+ tau^2 (estimated amount of total heterogeneity): 1.5234 (SE = 2.3569)
+ tau (square root of estimated tau^2 value):      1.2343
+ I^2 (total heterogeneity / total variability):   38.12%
+ H^2 (total variability / sampling variability):  1.62
+ 
+ Test for Heterogeneity:
+ Q(df = 6) = 8.7168, p-val = 0.1901
+ 
+ Model Results:
+ 
+ estimate      se    zval    pval    ci.lb   ci.ub    
+   0.7073  0.7777  0.9095  0.3631  -0.8170  2.2316    
+ 
+ ---
+ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+ 
+-- RMA, HR and MHR -- 
+
+                              HR           95%-CI %W(random)
+ Balsat M 2019             0.9076 [0.5825; 1.4142]       14.7
+ Gomes de Oliveira PG 2016 0.9281 [0.5338; 1.6137]        9.5
+ Inazawa N 2017            1.0385 [0.4439; 2.4295]        4.0
+ Ishiyama K 2011           0.9671 [0.2729; 3.4272]        1.8
+ Ogata M 2006              1.0154 [0.5830; 1.7684]        9.4
+ Olson AL 2014             0.9792 [0.6800; 1.4100]       21.8
+ Savolainen H 2005         0.8565 [0.4767; 1.5390]        8.4
+ Tormo N 2010              1.1662 [0.8000; 1.7000]       20.4
+ Wang LR 2006              2.2829 [0.8600; 6.0600]        3.0
+ Zerr DM 2005              0.8843 [0.4600; 1.7000]        6.8
+ 
+ Number of studies: k = 10
+ 
+                          HR           95%-CI    z p-value
+ Random effects model 1.0115 [0.8531; 1.1994] 0.13  0.8949
+ 
+ Quantifying heterogeneity:
+  tau^2 = 0 [0.0000; 0.0814]; tau = 0 [0.0000; 0.2854]
+  I^2 = 0.0% [0.0%; 62.4%]; H = 1.00 [1.00; 1.63]
+ 
+ Test of heterogeneity:
+     Q d.f. p-value
+  4.05    9  0.9080
+ 
+ Details on meta-analytical method:
+ - Inverse variance method
+ - DerSimonian-Laird estimator for tau^2
+ - Jackson method for confidence interval of tau^2 and tau
+
+-- Bayes, HR and MHR -- 
+
+Model type: Rubin model with aggregate data 
+ Pooling of effects: partial 
+ 
+ Aggregate treatment effect (on mean), 10 groups:
+ Hypermean (tau) =  0.013 with 95% interval -0.188 to 0.217 
+ Hyper-SD (sigma_tau) = 0.114 with 95% interval 0.004 to 0.371 
+ Total pooling (1 - I^2) = 0.84 with 95% interval 0.37 to 1.00 
+ 
+ Group-specific treatment effects:
+                              mean   sd  2.5%     50% 97.5% pooling
+ Balsat M 2019             -0.0104 0.13 -0.29 -0.0055  0.23    0.79
+ Gomes de Oliveira PG 2016 -0.0014 0.14 -0.30  0.0023  0.27    0.84
+ Inazawa N 2017             0.0151 0.16 -0.30  0.0137  0.34    0.91
+ Ishiyama K 2011            0.0104 0.17 -0.33  0.0108  0.35    0.95
+ Ogata M 2006               0.0127 0.14 -0.26  0.0124  0.30    0.84
+ Olson AL 2014              0.0037 0.12 -0.24  0.0052  0.24    0.74
+ Savolainen H 2005         -0.0122 0.14 -0.33 -0.0056  0.26    0.85
+ Tormo N 2010               0.0471 0.13 -0.18  0.0405  0.32    0.75
+ Wang LR 2006               0.0688 0.18 -0.22  0.0465  0.52    0.93
+ Zerr DM 2005              -0.0046 0.15 -0.32  0.0011  0.28    0.87
+ 

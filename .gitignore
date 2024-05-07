@@ -1,0 +1,18 @@
+backup/
+full text review papers/
+local_results/
+protocol/
+refs/
+metamedian/
+
+*.xlsx
+*.pdf
+!2024-05-07 Model details and plots/plots/*.pdf
+*.gsheet
+*.docx
+*.tar.gz
+*.txt
+!2024-05-07 Model details and plots/details/*.txt
+*.csv
+*.R
+!gdr_test.R
