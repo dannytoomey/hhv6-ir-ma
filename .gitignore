@@ -5,6 +5,7 @@ protocol/
 refs/
 metamedian/
 
+.DS_Store
 *.xlsx
 *.pdf
 !2024-05-07 Model details and plots/plots/*.pdf
