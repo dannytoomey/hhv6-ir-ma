@@ -8,12 +8,13 @@ metamedian/
 *.DS_Store
 *.xlsx
 *.pdf
-!2024-05-07 Model details and plots/plots/*.pdf
+!2024-05-13 Model details and plots/plots/*.pdf
 *.gsheet
 *.docx
+*.zip
 *.tar.gz
 *.txt
-!2024-05-07 Model details and plots/details/*.txt
+!2024-05-13 Model details and plots/details/*.txt
 *.csv
 *.R
 !gdr_test.R
