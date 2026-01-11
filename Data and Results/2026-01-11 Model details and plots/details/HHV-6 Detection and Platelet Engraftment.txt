@@ -1,4 +1,4 @@
-delayed engraftment 2025-07-09 13:50:34.2604
+delayed engraftment 2026-01-11 17:36:43.576408
 
 -- RMA, OR, no outlier adjustment -- 
 
@@ -21,7 +21,7 @@ Review:     HHV-6 and Delayed Platelet Engraftment
                           OR           95%-CI    t p-value
  Random effects model 1.8796 [1.0296; 3.4316] 2.48  0.0423
  
- Quantifying heterogeneity:
+ Quantifying heterogeneity (with 95%-CIs):
   tau^2 = 0.1050 [0.0000; 1.6981]; tau = 0.3240 [0.0000; 1.3031]
   I^2 = 21.2% [0.0%; 63.4%]; H = 1.13 [1.00; 1.65]
  
@@ -29,10 +29,11 @@ Review:     HHV-6 and Delayed Platelet Engraftment
      Q d.f. p-value
   8.88    7  0.2614
  
- Details on meta-analytical method:
+ Details of meta-analysis methods:
  - Inverse variance method
  - Paule-Mandel estimator for tau^2
  - Q-Profile method for confidence interval of tau^2 and tau
+ - Calculation of I^2 based on Q
  - Hartung-Knapp adjustment for random effects model (df = 7)
  - Continuity correction of 0.5 in studies with zero cell frequencies
 
@@ -70,7 +71,7 @@ Review:     HHV-6 and Delayed Platelet Engraftment
                           OR           95%-CI    t p-value
  Random effects model 2.3556 [1.7340; 3.2000] 6.84  0.0005
  
- Quantifying heterogeneity:
+ Quantifying heterogeneity (with 95%-CIs):
   tau^2 = 0 [0.0000; 0.1104]; tau = 0 [0.0000; 0.3323]
   I^2 = 0.0% [0.0%; 70.8%]; H = 1.00 [1.00; 1.85]
  
@@ -78,10 +79,11 @@ Review:     HHV-6 and Delayed Platelet Engraftment
      Q d.f. p-value
   1.66    6  0.9485
  
- Details on meta-analytical method:
+ Details of meta-analysis methods:
  - Inverse variance method
  - Paule-Mandel estimator for tau^2
  - Q-Profile method for confidence interval of tau^2 and tau
+ - Calculation of I^2 based on Q
  - Hartung-Knapp adjustment for random effects model (df = 6)
  - Continuity correction of 0.5 in studies with zero cell frequencies
 
@@ -111,7 +113,7 @@ Inference for Stan model: rubin.
  theta_k[7]   0.94    0.00 0.35   0.29   0.71   0.92  1.15  1.69 120990    1
  lp__       -10.90    0.01 2.40 -16.39 -12.29 -10.62 -9.19 -7.03  42868    1
  
- Samples were drawn using NUTS(diag_e) at Wed Jul  9 13:50:37 2025.
+ Samples were drawn using NUTS(diag_e) at Sun Jan 11 17:36:46 2026.
  For each parameter, n_eff is a crude measure of effective sample size,
  and Rhat is the potential scale reduction factor on split chains (at 
  convergence, Rhat=1).
