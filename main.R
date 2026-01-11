@@ -1,19 +1,26 @@
-lapply(c("googlesheets4","esc","meta","dplyr","metafor","grid",
-    "brms","baggr","ggplot2","mclust"),require,character.only=TRUE)
+# Install dependencies if not installed and load
+required_packages <- c("esc","meta","dplyr","metafor","grid",
+    "brms","baggr","ggplot2","mclust","readxl","fpc","rbibutils") 
+missing_packages <- required_packages[!(required_packages %in% installed.packages()[, "Package"])]
+if (length(missing_packages) > 0) {
+    install.packages(missing_packages, repos = "https://cloud.r-project.org")
+}
+lapply(required_packages, require, character.only=TRUE)
 setwd("./gosh_diagnostics")
 files.sources = list.files()
 sapply(files.sources, source)
 setwd("../")
 
+# Set runtime options 
 options(mc.cores = parallel::detectCores())
-gs4_deauth()
 options(error = function() traceback(3))
 
-dataset <- read_sheet(
-	"https://docs.google.com/spreadsheets/d/1qGOeQ-Jk_pvXYgzvlugtiVak8m9rKUmJDl8-dhoK1Qk/edit?gid=34534207#gid=34534207",
-	sheet = "Included"
-)
+# Load dataset
+file <- "./Data and Results/2026-01-11 IR MA Full Dataset.xlsx"
+dataset <- read_excel(file, sheet = "Included", col_names = TRUE)
 dataset <- dataset[dataset$`Included in analysis`=="Yes",]
+
+# Create directories for saving results 
 save_path <- paste0("Data\ and\ Results/local_results/",gsub(":",";",substr(Sys.time(),1,19)),"")
 if(!file.exists("Data\ and\ Results/local_results/")){
 	dir.create("Data\ and\ Results/local_results/")
@@ -29,7 +36,6 @@ if(!file.exists(paste0(save_path,"/details"))){
 }
 neutrophil_text_save <- "/details/HHV-6 Detection and Neutrophil Engraftment.txt"
 platelet_text_save <- "/details/HHV-6 Detection and Platelet Engraftment.txt"
-
 if(!file.exists(paste0(save_path,neutrophil_text_save))){
     file.create(paste0(save_path,neutrophil_text_save))
 }
@@ -37,6 +43,10 @@ if(!file.exists(paste0(save_path,platelet_text_save))){
     file.create(paste0(save_path,platelet_text_save))
 }
 
+# Run a random effects model for the OR of HHV-6 status on 
+# delayed or failed engraftment, with outlier adjustments,
+# publication bias if >= 10 studies included in the model, 
+# and Bayesian aggregation 
 or_analysis <- function(save_path,dataset,rma_pdf_width,bayes_pdf_width,
 title,rma_pdf,rma_title,bayes_title,bayes_pdf,text_save,rma_pdf_height,
 bayes_pdf_height,n_event_e,n_e,n_event_c,n_c,funnel_pdf,funnel_title){
@@ -45,19 +55,20 @@ bayes_pdf_height,n_event_e,n_e,n_event_c,n_c,funnel_pdf,funnel_title){
 
     cat(paste0("delayed engraftment ",Sys.time(),"\n"),
         file=paste0(save_path,text_save),append = TRUE)
-    meta_bin <- metabin(
-        event.e = unlist(dataset[c(n_event_e)],use.names=FALSE),
-        n.e = unlist(dataset[c(n_e)],use.names=FALSE),
-        event.c = unlist(dataset[c(n_event_c)],use.names=FALSE),
-        n.c = unlist(dataset[c(n_c)],use.names=FALSE),
+
+    meta_bin <- meta::metabin(
+        event.e = strtoi(unlist(dataset[c(n_event_e)],use.names=FALSE)),
+        n.e = strtoi(unlist(dataset[c(n_e)],use.names=FALSE)),
+        event.c = strtoi(unlist(dataset[c(n_event_c)],use.names=FALSE)),
+        n.c = strtoi(unlist(dataset[c(n_c)],use.names=FALSE)),
         studlab = dataset$`Study name`,
         sm = "OR",
         method = "MH",
         MH.exact = TRUE,
-        fixed = FALSE,
+        common = FALSE,
         random = TRUE,
         method.tau = "PM",
-        hakn = TRUE,
+        method.random.ci = TRUE,
         title = title
     )
 
@@ -74,7 +85,7 @@ bayes_pdf_height,n_event_e,n_e,n_event_c,n_c,funnel_pdf,funnel_title){
             test = "knha"
         )
         
-        res_gosh <- gosh(meta_rma)
+        res_gosh <- metafor::gosh(meta_rma)
         res_gosh_diag <- gosh.diagnostics(res_gosh) 
 
         a <- res_gosh_diag$outlier.studies.km
@@ -110,8 +121,8 @@ bayes_pdf_height,n_event_e,n_e,n_event_c,n_c,funnel_pdf,funnel_title){
         sortvar = TE,
         print.tau2 = TRUE,
         leftlabs = c("Study", "N delayed","Total","N delayed","Total"),
-        lab.e = "HHV-6 +",
-        lab.c = "HHV-6 -"
+        label.e = "HHV-6 +",
+        label.c = "HHV-6 -"
     )
     grid.text(rma_title, x=0.5,y=0.95, gp=gpar(fontsize=16))
 
@@ -134,6 +145,7 @@ bayes_pdf_height,n_event_e,n_e,n_event_c,n_c,funnel_pdf,funnel_title){
         prep_ma_df <- data.frame(group = meta_bin$studlab, tau = meta_bin$TE, 
             se = meta_bin$seTE)
     }
+
     baggr_bin <- baggr(prep_ma_df, model = "rubin", pooling = "partial",
         iter=25000, chains=10)
     if (outlier_adjustment){
@@ -163,7 +175,8 @@ bayes_pdf_height,n_event_e,n_e,n_event_c,n_c,funnel_pdf,funnel_title){
     }    
 }
 
-neutrophil_dataset <- dataset[unlist(lapply(dataset$`N HHV-6 pos pts with delayed or failed neutrophil engraftment`,is.numeric)) ,] 
+# Set file names and plotting variables 
+neutrophil_dataset <- dataset[!is.na(dataset$`N HHV-6 pos pts with delayed or failed neutrophil engraftment`) ,] 
 rma_pdf_width <- 10
 bayes_pdf_width <- 8
 neutrophil_title <- "HHV-6 and Delayed Neutrophil Engraftment"
@@ -181,6 +194,7 @@ neutrophil_n_e <- "N patients with HHV-6"
 neutrophil_n_event_c <- "N HHV-6 neg pts with delayed or failed neutrophil engraftment"
 neutrophil_n_c <- "N patients without HHV-6"
 
+# Run OR analysis for neutrophil dataset
 or_analysis(save_path,neutrophil_dataset,rma_pdf_width,bayes_pdf_width,neutrophil_title,
 neutrophil_rma_pdf,neutrophil_rma_title,neutrophil_bayes_title,neutrophil_bayes_pdf,
 neutrophil_text_save,neutrophil_rma_pdf_height,neutrophil_bayes_pdf_height,
@@ -203,12 +217,14 @@ platelet_n_e <- "N patients with HHV-6"
 platelet_n_event_c <- "N HHV-6 neg pts with delayed or failed platelet engraftment"
 platelet_n_c <- "N patients without HHV-6"
 
+# Run OR analysis for platelet dataset
 or_analysis(save_path,platelet_dataset,rma_pdf_width,bayes_pdf_width,platelet_title,
 platelet_rma_pdf,platelet_rma_title,platelet_bayes_title,platelet_bayes_pdf,
 platelet_text_save,platelet_rma_pdf_height,platelet_bayes_pdf_height,
 platelet_n_event_e,platelet_n_e,platelet_n_event_c,platelet_n_c,
 platelet_funnel_pdf,platelet_funnel_title)
 
+# Clean up working directory 
 if (file.exists("./Rplots.pdf")) {
   file.remove("./Rplots.pdf")
 }

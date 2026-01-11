@@ -2,9 +2,8 @@
 *.rds
 
 Data\ and\ Results/*
-!Data\ and\ Results/2025-07-09\ Model\ details\ and\ plots/
-!Data\ and\ Results/2025-07-09\ Model\ details\ and\ plots/ 
-!Data\ and\ Results/2025-07-10\ IR\ MA\ Full\ Dataset.xlsx 
+!Data\ and\ Results/2026-01-11\ Model\ details\ and\ plots/
+!Data\ and\ Results/2026-01-11\ IR\ MA\ Full\ Dataset.xlsx 
 
 Figures/
 File\ backups/
