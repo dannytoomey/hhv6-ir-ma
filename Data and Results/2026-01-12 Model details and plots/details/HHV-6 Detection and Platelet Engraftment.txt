@@ -1,4 +1,4 @@
-delayed engraftment 2026-01-11 17:36:43.576408
+delayed engraftment 2026-01-12 15:11:41.863252
 
 -- RMA, OR, no outlier adjustment -- 
 
@@ -113,7 +113,7 @@ Inference for Stan model: rubin.
  theta_k[7]   0.94    0.00 0.35   0.29   0.71   0.92  1.15  1.69 120990    1
  lp__       -10.90    0.01 2.40 -16.39 -12.29 -10.62 -9.19 -7.03  42868    1
  
- Samples were drawn using NUTS(diag_e) at Sun Jan 11 17:36:46 2026.
+ Samples were drawn using NUTS(diag_e) at Mon Jan 12 15:11:44 2026.
  For each parameter, n_eff is a crude measure of effective sample size,
  and Rhat is the potential scale reduction factor on split chains (at 
  convergence, Rhat=1).
