@@ -16,7 +16,7 @@ options(mc.cores = parallel::detectCores())
 options(error = function() traceback(3))
 
 # Load dataset
-file <- "./Data and Results/2026-01-11 IR MA Full Dataset.xlsx"
+file <- "./Data and Results/2026-01-21 IR MA Full Dataset.xlsx"
 dataset <- read_excel(file, sheet = "Included", col_names = TRUE)
 dataset <- dataset[dataset$`Included in analysis`=="Yes",]
 
@@ -52,6 +52,7 @@ title,rma_pdf,rma_title,bayes_title,bayes_pdf,text_save,rma_pdf_height,
 bayes_pdf_height,n_event_e,n_e,n_event_c,n_c,funnel_pdf,funnel_title){
     
     outlier_adjustment <- TRUE 
+    bayesian_aggregation <- TRUE
 
     cat(paste0("delayed engraftment ",Sys.time(),"\n"),
         file=paste0(save_path,text_save),append = TRUE)
@@ -86,7 +87,7 @@ bayes_pdf_height,n_event_e,n_e,n_event_c,n_c,funnel_pdf,funnel_title){
         )
         
         res_gosh <- metafor::gosh(meta_rma)
-        res_gosh_diag <- gosh.diagnostics(res_gosh) 
+        res_gosh_diag <- gosh.diagnostics(res_gosh)
 
         a <- res_gosh_diag$outlier.studies.km
         b <- res_gosh_diag$outlier.studies.db
@@ -146,33 +147,35 @@ bayes_pdf_height,n_event_e,n_e,n_event_c,n_c,funnel_pdf,funnel_title){
             se = meta_bin$seTE)
     }
 
-    baggr_bin <- baggr(prep_ma_df, model = "rubin", pooling = "partial",
-        iter=25000, chains=10)
-    if (outlier_adjustment){
-        cat("\n-- Bayes, OR, outlier adjusted -- \n",
-            file=paste0(save_path,text_save),append = TRUE)
-    } else {
-        cat("\n-- Bayes, OR -- \n",file=paste0(save_path,text_save),append = TRUE)
-    }
+    if (bayesian_aggregation){
+            baggr_bin <- baggr(prep_ma_df, model = "rubin", pooling = "partial",
+            iter=25000, chains=10)
+        if (outlier_adjustment){
+            cat("\n-- Bayes, OR, outlier adjusted -- \n",
+                file=paste0(save_path,text_save),append = TRUE)
+        } else {
+            cat("\n-- Bayes, OR -- \n",file=paste0(save_path,text_save),append = TRUE)
+        }
 
-    if (max(rstan:::summary_sim(baggr_bin$fit@sim)$rhat) > 1.05) {
-        cat("Operation terminated due to lack of chain convergence. \n",
-            file=paste0(save_path,text_save),append = TRUE)
-    } else {
-        # save model fit and results if chains converged
-        cat("\n- Model fit - \n",file=paste0(save_path,text_save),append = TRUE)
-        cat(paste0(capture.output(print(baggr_bin$fit)),"\n"),
-            file=paste0(save_path,text_save),append = TRUE)
-        cat("\n- Model results - \n",file=paste0(save_path,text_save),append = TRUE)
-        cat(paste0(capture.output(print(baggr_bin)),"\n"),
-            file=paste0(save_path,text_save),append = TRUE)
-        # save baggr plot
-        p <- plot(baggr_bin,hyper=TRUE,vline=FALSE,style="areas") + bayes_title
-        pdf(file = paste0(save_path,bayes_pdf), width=bayes_pdf_width, 
-            height=bayes_pdf_height, onefile=FALSE)
-        print(p)
-        dev.off()
-    }    
+        if (max(rstan:::summary_sim(baggr_bin$fit@sim)$rhat) > 1.05) {
+            cat("Operation terminated due to lack of chain convergence. \n",
+                file=paste0(save_path,text_save),append = TRUE)
+        } else {
+            # save model fit and results if chains converged
+            cat("\n- Model fit - \n",file=paste0(save_path,text_save),append = TRUE)
+            cat(paste0(capture.output(print(baggr_bin$fit)),"\n"),
+                file=paste0(save_path,text_save),append = TRUE)
+            cat("\n- Model results - \n",file=paste0(save_path,text_save),append = TRUE)
+            cat(paste0(capture.output(print(baggr_bin)),"\n"),
+                file=paste0(save_path,text_save),append = TRUE)
+            # save baggr plot
+            p <- plot(baggr_bin,hyper=TRUE,vline=FALSE,style="areas") + bayes_title
+            pdf(file = paste0(save_path,bayes_pdf), width=bayes_pdf_width, 
+                height=bayes_pdf_height, onefile=FALSE)
+            print(p)
+            dev.off()
+        }    
+    }
 }
 
 # Set file names and plotting variables 
