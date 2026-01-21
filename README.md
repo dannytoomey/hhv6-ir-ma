@@ -4,8 +4,8 @@ Code and data to perform analyses in Phan et al.
 
 # Contents
 
-- `Data and Results/2026-01-12 Model details and plots/` - Plots and full details for all models included in results.
-- `Data and Results/2026-01-11 IR MA Full Dataset.xlsx` - An excel spreadsheet containing all screening results and data used in analyses. 
+- `Data and Results/2026-01-21 Model details and plots/` - Plots and full details for all models included in results.
+- `Data and Results/2026-01-21 IR MA Full Dataset.xlsx` - An excel spreadsheet containing all screening results and data used in analyses. 
 - `gosh_diagnostics/` - Source R files for the outlier analyses described in the results. 
 - `main.R` - A script that performs all analyses described in the results.
 
